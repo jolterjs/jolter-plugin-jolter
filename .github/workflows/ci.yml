@@ -19,12 +19,6 @@ jobs:
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-          token: ${{ secrets.JOLTERBOT_TOKEN }}
-
-      - name: Configure jolterbot
-        run: |
-          git config --global user.name "jolterbot"
-          git config --global user.email "292917661+jolterbot@users.noreply.github.com"
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -32,18 +26,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 22.x
-
-      - name: Checkout JDT
-        uses: actions/checkout@v7
-        with:
-          repository: jolterjs/jdt
-          path: .deps/jdt
-          token: ${{ secrets.JOLTERBOT_TOKEN }}
+          node-version: 24.x
 
       - name: Install dependencies
-        env:
-          GITHUB_TOKEN: ${{ secrets.JOLTERBOT_TOKEN }}
         run: bun install
 
       - name: Check formatting

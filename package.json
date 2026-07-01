@@ -27,7 +27,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@jolter/jdt": "file:.deps/jdt",
+    "@jolter/jdt": "^0.2.0",
     "prettier": "^3.9.4"
   }
 }
