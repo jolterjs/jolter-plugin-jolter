@@ -5,7 +5,7 @@
     "": {
       "name": "jolter-plugin-jolter",
       "devDependencies": {
-        "@jolter/jdt": "file:.deps/jdt",
+        "@jolter/jdt": "^0.2.0",
         "prettier": "^3.9.4",
       },
     },
@@ -97,7 +97,7 @@
 
     "@esbuild/win32-x64": ["@esbuild/win32-x64@0.28.1", "", { "os": "win32", "cpu": "x64" }, "sha512-bm4Mowrv+GXMlpWX++EcXw/iLyd1o3+bJkC2DkWXYVvgZCqD/bSj9ctZeAMC3cIxgjRVR2Dufaiu4YPxr5gW1A=="],
 
-    "@jolter/jdt": ["@jolter/jdt@file:.deps/jdt", { "dependencies": { "@bytecodealliance/componentize-js": "^0.21.0", "@bytecodealliance/jco": "^1.15.4", "esbuild": "^0.28.1" }, "devDependencies": { "prettier": "^3.9.4" }, "bin": { "jdt": "./src/cli.js" } }],
+    "@jolter/jdt": ["@jolter/jdt@0.2.0", "", { "dependencies": { "@bytecodealliance/componentize-js": "^0.21.0", "@bytecodealliance/jco": "^1.15.4", "esbuild": "^0.28.1" }, "bin": { "jdt": "src/cli.js" } }, "sha512-U6bKo+pV6btLltZCzOFa0xcJuDK6AxNCxa7KFzgTROSBfKs/uWcYSem9f9/u2SYUJmL3kyKprTu0kJcWZWHGPw=="],
 
     "@jridgewell/gen-mapping": ["@jridgewell/gen-mapping@0.3.13", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.5.0", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA=="],
 
