@@ -9,7 +9,7 @@
   "homepage": "https://jolter.dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jolterjs/jolter.git"
+    "url": "https://github.com/jolterjs/jolter-plugin-jolter.git"
   },
   "license": "MIT",
   "readme": "./README.md",
