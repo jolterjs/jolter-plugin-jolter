@@ -1,0 +1,105 @@
+name: Auto-update Jolter releases
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: jolter-plugin-jolter-auto-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.JOLTERBOT_TOKEN }}
+
+      - name: Configure jolterbot
+        run: |
+          git config user.name "jolterbot"
+          git config user.email "292917661+jolterbot@users.noreply.github.com"
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22.x
+
+      - name: Checkout JDT
+        uses: actions/checkout@v7
+        with:
+          repository: jolterjs/jdt
+          path: .deps/jdt
+          token: ${{ secrets.JOLTERBOT_TOKEN }}
+
+      - name: Install dependencies
+        env:
+          GITHUB_TOKEN: ${{ secrets.JOLTERBOT_TOKEN }}
+        run: bun install
+
+      - name: Refresh Jolter release catalog
+        id: refresh
+        env:
+          GITHUB_TOKEN: ${{ secrets.JOLTERBOT_TOKEN }}
+        run: |
+          set -euo pipefail
+          bun run update:releases
+          if git diff --quiet -- src/releases.ts; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bump plugin version
+        if: steps.refresh.outputs.changed == 'true'
+        id: version
+        run: |
+          set -euo pipefail
+          VERSION="$(node scripts/bump-version.mjs patch)"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Format and validate
+        if: steps.refresh.outputs.changed == 'true'
+        run: |
+          bun run format
+          bun run format:check
+          bun run validate
+
+      - name: Commit release catalog update
+        if: steps.refresh.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+          git add src/releases.ts package.json bun.lock
+          git commit \
+            --author "jolterbot <292917661+jolterbot@users.noreply.github.com>" \
+            -m "chore: update Jolter releases for plugin v${{ steps.version.outputs.version }}"
+          git push
+
+      - name: Build release artifacts
+        if: steps.refresh.outputs.changed == 'true'
+        run: bun run pack
+
+      - name: Publish GitHub release
+        if: steps.refresh.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.JOLTERBOT_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          gh release create "v${VERSION}" \
+            dist/plugin.wasm \
+            dist/plugin.release.json \
+            dist/checksums.txt \
+            --title "jolter-plugin-jolter v${VERSION}" \
+            --notes "Automated jolter-plugin-jolter update for newly published Jolter release artifacts."

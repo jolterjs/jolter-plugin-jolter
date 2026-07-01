@@ -1,5 +1,5 @@
 {
-  "$schema": "https://jolter.dev/schemas/plugin/v1/schema.json",
+  "$schema": "https://schemas.jolter.dev/plugin/v1/schema.json",
   "schemaVersion": 1,
 
   "name": "@jolterjs/jolter",
@@ -9,7 +9,7 @@
   "homepage": "https://jolter.dev",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jolterjs/jolter-plugin-jolter.git"
+    "url": "https://github.com/jolterjs/jolter.git"
   },
   "license": "MIT",
   "readme": "./README.md",
@@ -18,10 +18,29 @@
   "supports": {
     "jolter": ">=0.3.0"
   },
+  "provides": {
+    "tools": {
+      "jolter": {
+        "displayName": "Jolter",
+        "description": "The Jolter runtime and tooling manager.",
+        "commands": ["jolter"]
+      }
+    }
+  },
+  "permissions": {
+    "network": {
+      "allowedHosts": ["github.com", "objects.githubusercontent.com"]
+    },
+    "filesystem": {
+      "read": ["project"],
+      "write": ["jolter-cache", "jolter-tools"]
+    },
+    "commands": { "execute": false }
+  },
   "links": {
     "homepage": "https://jolter.dev",
     "documentation": "https://jolter.dev/docs",
-    "issues": "https://github.com/jolterjs/jolter-plugin-eslint/issues",
+    "issues": "https://github.com/jolterjs/jolter/issues",
     "funding": "https://jolter.dev/donate"
   }
 }

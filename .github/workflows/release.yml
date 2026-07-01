@@ -1,0 +1,24 @@
+name: Register Jolter release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure jolterbot
+        run: |
+          git config --global user.name "jolterbot"
+          git config --global user.email "292917661+jolterbot@users.noreply.github.com"
+
+      - name: Register release with Jolter
+        uses: jolterjs/register-release-action@v1
+        with:
+          registry-url: https://registry.jolter.dev
+          plugin-name: "@jolterjs/jolter"
+          github-token: ${{ secrets.JOLTERBOT_TOKEN }}

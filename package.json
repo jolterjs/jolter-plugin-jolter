@@ -1,0 +1,33 @@
+{
+  "name": "jolter-plugin-jolter",
+  "version": "1.0.0",
+  "description": "The official plugin for the Jolter runtime & tooling manager for the Jolter ecosystem.",
+  "type": "module",
+  "scripts": {
+    "update:releases": "node scripts/update-releases.mjs",
+    "bump:patch": "node scripts/bump-version.mjs patch",
+    "run:list": "jdt run list-tools",
+    "run:resolve": "jdt run resolve-tool jolter latest --os win32 --arch x64",
+    "validate": "jdt validate",
+    "pack": "jdt pack",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jolter",
+    "plugin",
+    "runtime",
+    "tooling",
+    "manager"
+  ],
+  "author": {
+    "name": "JolterJS",
+    "url": "https://jolter.dev"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@jolter/jdt": "file:.deps/jdt",
+    "prettier": "^3.9.4"
+  }
+}

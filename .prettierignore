@@ -1,0 +1,4 @@
+node_modules/
+.jdt/
+.deps/
+dist/
