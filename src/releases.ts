@@ -15,30 +15,63 @@ export interface JolterRelease {
 // Refresh with `bun run update:releases`.
 export const releases: JolterRelease[] = [
   {
-    version: "0.3.0-rc.1",
+    version: "0.3.0-rc.3",
     prerelease: true,
     assets: [
       {
-        target: "aarch64-apple-darwin",
-        fileName: "jolter-v0.3.0-rc.1-aarch64-apple-darwin.tar.gz",
+        target: "x86_64-apple-darwin",
+        fileName: "jolter-v0.3.0-rc.3-x86_64-apple-darwin.tar.gz",
         sha256:
-          "bc1f41addae9952313213a9f658fb1b3e98f5997237a0f73f96c571577f57bc3",
+          "9d85ce802ff99a800718079a05c571e100991557a106d0dace57b63af5e0a892",
         archiveFormat: "tar.gz",
       },
       {
-        target: "aarch64-pc-windows-msvc",
-        fileName: "jolter-v0.3.0-rc.1-aarch64-pc-windows-msvc.zip",
+        target: "x86_64-pc-windows-msvc",
+        fileName: "jolter-v0.3.0-rc.3-x86_64-pc-windows-msvc.zip",
         sha256:
-          "24bdab0900949dad4cdeec709dce0f85621b6a126be6949cad2511ec3e3484fd",
+          "a7940fdf5d89b43ca4a0a0827a34f1635a318b5b5972b139cfe98fe07c25cd8b",
         archiveFormat: "zip",
       },
       {
-        target: "aarch64-unknown-linux-gnu",
-        fileName: "jolter-v0.3.0-rc.1-aarch64-unknown-linux-gnu.tar.gz",
+        target: "x86_64-unknown-linux-gnu",
+        fileName: "jolter-v0.3.0-rc.3-x86_64-unknown-linux-gnu.tar.gz",
         sha256:
-          "3445d14ae1e7cc6e34de22ec4ab379523b5031aeb66c44afac7d84eafb8b9100",
+          "8926726cd03ad81d190dd4d1d1adec7967cd8961ee2d346c2cef1f1f88e45311",
         archiveFormat: "tar.gz",
       },
+    ],
+  },
+  {
+    version: "0.3.0-rc.2",
+    prerelease: true,
+    assets: [
+      {
+        target: "x86_64-apple-darwin",
+        fileName: "jolter-v0.3.0-rc.2-x86_64-apple-darwin.tar.gz",
+        sha256:
+          "a8b0cd8c87e6c026d73e0a98212bb8fda7554d8fa90befe26e5e985c5939f226",
+        archiveFormat: "tar.gz",
+      },
+      {
+        target: "x86_64-pc-windows-msvc",
+        fileName: "jolter-v0.3.0-rc.2-x86_64-pc-windows-msvc.zip",
+        sha256:
+          "db6c0f36758b191829ed427f9748bb4743c5c0ecafc739ed274a012367b48422",
+        archiveFormat: "zip",
+      },
+      {
+        target: "x86_64-unknown-linux-gnu",
+        fileName: "jolter-v0.3.0-rc.2-x86_64-unknown-linux-gnu.tar.gz",
+        sha256:
+          "3fd4d73b77bfed731d0da2b16270765537d91c4a6d3bfdcf44ea9d221faaddd4",
+        archiveFormat: "tar.gz",
+      },
+    ],
+  },
+  {
+    version: "0.3.0-rc.1",
+    prerelease: true,
+    assets: [
       {
         target: "x86_64-apple-darwin",
         fileName: "jolter-v0.3.0-rc.1-x86_64-apple-darwin.tar.gz",
