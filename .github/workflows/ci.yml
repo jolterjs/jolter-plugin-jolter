@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   quality:
-    runs-on: [self-hosted, linux, quality]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
