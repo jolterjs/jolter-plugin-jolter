@@ -45,11 +45,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.JOLTERBOT_TOKEN }}
         run: |
           set -euo pipefail
+
           bun run update:releases
+
           if git diff --quiet -- src/releases.ts; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new Jolter versions found. Skipping repository update and release publish."
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "New Jolter versions found. Continuing with plugin release."
           fi
 
       - name: Bump plugin version
@@ -57,6 +61,7 @@ jobs:
         id: version
         run: |
           set -euo pipefail
+
           VERSION="$(node scripts/bump-version.mjs patch)"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
 
@@ -71,10 +76,18 @@ jobs:
         if: steps.refresh.outputs.changed == 'true'
         run: |
           set -euo pipefail
+
           git add src/releases.ts package.json bun.lock
+
+          if git diff --cached --quiet; then
+            echo "No staged changes after formatting/version bump. Skipping commit."
+            exit 0
+          fi
+
           git commit \
             --author "jolterbot <292917661+jolterbot@users.noreply.github.com>" \
             -m "chore: update Jolter releases for plugin v${{ steps.version.outputs.version }}"
+
           git push
 
       - name: Build release artifacts
@@ -88,6 +101,7 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           set -euo pipefail
+
           gh release create "v${VERSION}" \
             dist/plugin.wasm \
             dist/plugin.release.json \
