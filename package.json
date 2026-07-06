@@ -1,6 +1,6 @@
 {
   "name": "jolter-plugin-jolter",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The official plugin for the Jolter runtime & tooling manager for the Jolter ecosystem.",
   "type": "module",
   "scripts": {
