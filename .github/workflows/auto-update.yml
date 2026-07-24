@@ -47,6 +47,7 @@ jobs:
           set -euo pipefail
 
           bun run update:releases
+          bun run format
 
           if git diff --quiet -- src/releases.ts; then
             echo "changed=false" >> "$GITHUB_OUTPUT"

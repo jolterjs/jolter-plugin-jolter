@@ -3,6 +3,20 @@
 The official Jolter plugin for installing Jolter itself from
 https://github.com/jolterjs/jolter release artifacts.
 
+## Installation
+
+This plugin can be installed from the [Jolter registry](https://plugins.jolter.dev/) using the following command:
+
+```sh
+jolter plugin add jolter
+```
+
+Alternatively you can install the plugin via the canonical plugin name:
+
+```sh
+jolter plugin add @jolterjs/jolter
+```
+
 ## Development
 
 ```sh
